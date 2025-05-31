@@ -32,6 +32,12 @@ func setupRoutes(app *fiber.App) {
 	// Tasks
 	taskGroup := apiGroup.Group(TasksPath)
 	taskGroup.Get("/", task.GetTasks)
+	taskGroup.Post("/", task.AddTask)
+	taskGroup.Patch("/:id", task.UpdateTask)
+	taskGroup.Delete("/:id", task.DeleteTask)
+
+	// Tasks dates
+	taskGroup.Get("/dates", task.GetDates)
 }
 
 // Handle error response

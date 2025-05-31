@@ -2,7 +2,7 @@ package config
 
 type EnvKey string
 
-// Env params keys
+// Environment variable keys
 const (
 	EnvAppAddress EnvKey = "APP_ADDRESS" // e.g. "localhost:8080"
 	EnvDBHost     EnvKey = "DB_HOST"     // e.g. "localhost"

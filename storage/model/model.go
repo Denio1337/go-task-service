@@ -12,11 +12,11 @@ type (
 		gorm.Model
 
 		// Base information
-		Name        string `gorm:"not null;size:100" validate:"required,min=3,max=100" json:"name"`
-		Description string `gorm:"size:255" json:"description"`
+		Name        string `gorm:"not null;size:100"`
+		Description string `gorm:"size:255"`
 
 		// Time information
-		StartTime time.Time `gorm:"not null" validate:"required" json:"start_time"`
-		EndTime   time.Time `json:"end_time"`
+		StartTime time.Time `gorm:"not null"`
+		EndTime   time.Time // UNUSED
 	}
 )

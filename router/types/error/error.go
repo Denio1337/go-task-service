@@ -8,7 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func NewError(code int, message string) *fiber.Error {
+func New(code int, message string) *fiber.Error {
 	return &fiber.Error{
 		Code:    code,
 		Message: message,

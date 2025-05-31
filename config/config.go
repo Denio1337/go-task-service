@@ -15,7 +15,7 @@ const (
 	NoEnvPathError = "no .env file found, please create one from .env.example"
 )
 
-// Load .env file
+// Load environment variables
 func init() {
 	err := godotenv.Load(EnvPath)
 	if err != nil {
@@ -23,9 +23,9 @@ func init() {
 	}
 }
 
-// Get .env value by key
+// Get environment value by key
 func Get(key EnvKey) string {
-	// Return default value "" if env key is invalid
+	// Validate key
 	if !key.IsValid() {
 		return ""
 	}
