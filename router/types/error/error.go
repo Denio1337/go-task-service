@@ -8,6 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// Constructs a new fiber error with given code and message
 func New(code int, message string) *fiber.Error {
 	return &fiber.Error{
 		Code:    code,
@@ -15,43 +16,27 @@ func New(code int, message string) *fiber.Error {
 	}
 }
 
-// General router errors
-var (
-	// 400 Bad Request
-	ErrBadRequest = fiber.NewError(fiber.StatusBadRequest, "invalid input data")
-
-	// 401 Unauthorized
-	ErrUnauthorized = fiber.NewError(fiber.StatusUnauthorized, "unauthorized access")
-
-	// 403 Forbidden
-	ErrForbidden = fiber.NewError(fiber.StatusForbidden, "access forbidden")
-
-	// 404 Not Found
-	ErrNotFound = fiber.NewError(fiber.StatusNotFound, "resource not found")
-
-	// 409 Conflict
-	ErrConflict = fiber.NewError(fiber.StatusConflict, "resource conflict")
-
-	// 500 Internal Server Error
-	ErrInternalServer = fiber.NewError(fiber.StatusInternalServerError, "internal server error")
-)
-
-// Create fiber error about invalid validation
+// Constructs invalid validation error
 func ValidationError(errs []validator.ValidationError) *fiber.Error {
 	errMsgs := make([]string, 0)
 
 	// Formatting list of validation errors
 	for _, err := range errs {
-		errMsgs = append(errMsgs, fmt.Sprintf(
-			"[%s]: '%v' | Needs to implement '%s'",
-			err.FailedField,
-			err.Value,
-			err.Tag,
-		))
+		errMsgs = append(errMsgs, validationMessage(err.FailedField, err.Value, err.Tag))
 	}
 
 	return &fiber.Error{
 		Code:    fiber.ErrBadRequest.Code,
-		Message: strings.Join(errMsgs, " and "),
+		Message: strings.Join(errMsgs, ValidationErrorSeparator),
 	}
+}
+
+// Constructs validation error message
+func validationMessage(field string, value any, tag string) string {
+	return fmt.Sprintf(
+		"[%s]: '%v' | Needs to implement '%s'",
+		field,
+		value,
+		tag,
+	)
 }

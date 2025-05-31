@@ -14,7 +14,6 @@ import (
 // GET /tasks
 func GetTasks(c *fiber.Ctx) error {
 	// TODO: Is it possible to validate query parameters with Fiber's built-in validation?
-	// TODO: Additional date query paremeter
 
 	// Get pagination parameters
 	page := uint(c.QueryInt(PageName, DefaultPage))

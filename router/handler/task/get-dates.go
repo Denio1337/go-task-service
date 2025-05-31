@@ -12,17 +12,17 @@ import (
 
 // GET /tasks/dates
 func GetDates(c *fiber.Ctx) error {
-	// Get pagination parameters
+	// Extract pagination parameters from query
 	page := uint(c.QueryInt(PageName, DefaultPage))
 	pageSize := uint(c.QueryInt(PageSizeName, DefaultPageSize))
 
-	// Extract date from query parameters
+	// Extract date parameter from query
 	date, err := getDateParam(c, DateName, time.Time{})
 	if err != nil {
 		return ErrInvalidDate
 	}
 
-	// Validate query parameters
+	// Validate extracted query parameters
 	dto := &GetDatesDTO{
 		Page:     page,
 		PageSize: pageSize,

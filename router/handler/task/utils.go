@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// Get date parameter from query with a default value
 func getDateParam(c *fiber.Ctx, name string, defaultValue time.Time) (time.Time, error) {
 	// Extract date from query parameters
 	dateStr := c.Query(name, defaultValue.Format(time.RFC3339))
@@ -22,7 +23,7 @@ func getDateParam(c *fiber.Ctx, name string, defaultValue time.Time) (time.Time,
 	return parsedDate, nil
 }
 
-// task.Task to Task
+// Transform task.Task to Task
 func transformServiceTask(task *task.Task) *Task {
 	return &Task{
 		ID:          task.ID,
@@ -33,7 +34,7 @@ func transformServiceTask(task *task.Task) *Task {
 	}
 }
 
-// []task.Task to []Task
+// Transform []task.Task to []Task
 func transformServiceTasks(tasks []*task.Task) []*Task {
 	result := make([]*Task, len(tasks))
 	for i, task := range tasks {

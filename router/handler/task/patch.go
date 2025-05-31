@@ -18,7 +18,7 @@ func UpdateTask(c *fiber.Ctx) error {
 		return ErrInvalidId
 	}
 
-	// Validate body
+	// Parse request body into DTO
 	var dto UpdateTaskDTO
 	if err := c.BodyParser(&dto); err != nil {
 		return ErrInvalidBody
@@ -29,7 +29,7 @@ func UpdateTask(c *fiber.Ctx) error {
 		return cerror.ValidationError(errs)
 	}
 
-	// Call service to update task
+	// Route to service
 	updated, err := task.UpdateTask(&task.Task{
 		ID:          uint(id),
 		Name:        dto.Name,
@@ -37,10 +37,14 @@ func UpdateTask(c *fiber.Ctx) error {
 		StartTime:   dto.StartTime,
 		EndTime:     dto.EndTime,
 	})
+
+	// Handle specific error for task not found
 	var errTaskNotFound *task.TaskNotFoundError
 	if errors.As(err, &errTaskNotFound) {
 		return ErrTaskNotFound
 	}
+
+	// Handle other errors
 	if err != nil {
 		return err
 	}

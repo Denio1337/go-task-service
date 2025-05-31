@@ -18,10 +18,14 @@ func DeleteTask(c *fiber.Ctx) error {
 
 	// Route to service
 	err = task.DeleteTask(uint(id))
+
+	// Handle specific error for task not found
 	var errTaskNotFound *task.TaskNotFoundError
 	if errors.As(err, &errTaskNotFound) {
 		return ErrTaskNotFound
 	}
+
+	// Handle other errors
 	if err != nil {
 		return err
 	}

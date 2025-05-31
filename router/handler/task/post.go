@@ -12,6 +12,7 @@ import (
 
 // POST /tasks
 func AddTask(c *fiber.Ctx) error {
+	// Parse request body into DTO
 	var dto AddTaskDTO
 	if err := c.BodyParser(&dto); err != nil {
 		return ErrInvalidBody

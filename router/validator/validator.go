@@ -2,9 +2,6 @@ package validator
 
 import "github.com/go-playground/validator/v10"
 
-// Package instance of validator
-var instance *validator.Validate
-
 // Initialize instance
 func init() {
 	instance = validator.New()

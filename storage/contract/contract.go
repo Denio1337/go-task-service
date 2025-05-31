@@ -36,18 +36,18 @@ type (
 		Date   time.Time
 	}
 
-	UpdateTaskParams struct {
-		ID   uint
-		Task *model.Task
-	}
-
 	GetDatesResult struct {
 		Dates []time.Time
 		Total uint
 	}
+
+	UpdateTaskParams struct {
+		ID   uint
+		Task *model.Task
+	}
 )
 
-// TaskNotFoundError
+// TaskNotFoundError represents an error when a task is not found in the storage.
 
 type TaskNotFoundError struct {
 	ID uint

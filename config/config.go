@@ -7,19 +7,11 @@ import (
 	"github.com/joho/godotenv"
 )
 
-const (
-	// Path to the .env file
-	EnvPath = ".env"
-
-	// Error message when .env file is not found
-	NoEnvPathError = "no .env file found, please create one from .env.example"
-)
-
 // Load environment variables
 func init() {
 	err := godotenv.Load(EnvPath)
 	if err != nil {
-		log.Fatal(NoEnvPathError)
+		log.Fatal(ErrEnvNotFound)
 	}
 }
 
@@ -31,4 +23,18 @@ func Get(key EnvKey) string {
 	}
 
 	return os.Getenv(string(key))
+}
+
+func GetBool(key EnvKey) bool {
+	value := Get(key)
+	if value == "" {
+		return false
+	}
+
+	switch value {
+	case "true", "1":
+		return true
+	default:
+		return false
+	}
 }

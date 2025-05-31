@@ -70,13 +70,13 @@ type (
 )
 
 const (
-	PageName     = "page"      // Query parameter for page number
-	PageSizeName = "page_size" // Query parameter for page size
-	DateName     = "date"      // Query parameter for date
-	IdName       = "id"        // Path parameter for task ID
+	PageName     = "page"      // Query parameter name for page number
+	PageSizeName = "page_size" // Query parameter name for page size
+	DateName     = "date"      // Query parameter name for date
+	IdName       = "id"        // Path parameter name for task ID
 
-	DefaultPage     = 1  // Default page number if not specified
-	DefaultPageSize = 10 // Default page size if not specified
+	DefaultPage     = 1  // Default page number value
+	DefaultPageSize = 10 // Default page size value
 )
 
 var (
@@ -122,6 +122,7 @@ var (
 		"end_time must be after start_time and in ISO 8601 format (RFC3339)",
 	)
 
+	// Returned when the task with the specified ID is not found
 	ErrTaskNotFound = cerror.New(
 		fiber.ErrNotFound.Code,
 		"task not found",

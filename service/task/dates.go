@@ -3,6 +3,7 @@ package task
 import (
 	"app/storage"
 	"math"
+	"time"
 )
 
 func GetDates(params *GetDatesParams) (*GetDatesResult, error) {
@@ -14,6 +15,7 @@ func GetDates(params *GetDatesParams) (*GetDatesResult, error) {
 	result, err := storage.GetDates(&storage.GetDatesParams{
 		Offset: offset,
 		Limit:  limit,
+		Date:   params.Date.Truncate(24 * time.Hour),
 	})
 	if err != nil {
 		return nil, err

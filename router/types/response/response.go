@@ -1,11 +1,6 @@
 package response
 
-type Response struct {
-	Success bool   `json:"success"`
-	Error   string `json:"error"`
-	Data    any    `json:"data"`
-}
-
+// Constructs a successful response with data
 func SuccessResponse(data any) *Response {
 	return &Response{
 		Success: true,
@@ -14,6 +9,7 @@ func SuccessResponse(data any) *Response {
 	}
 }
 
+// Constructs an error response with a message
 func ErrorResponse(message string) *Response {
 	return &Response{
 		Success: false,
